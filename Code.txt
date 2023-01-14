@@ -1,0 +1,78 @@
+@startuml
+!theme aws-orange
+start
+repeat :Вырать товар;
+
+repeat while (Товар выбран?) is (нет) not (да)
+
+:Оформление заказа;
+:Заказ;
+:Проверить наличие товара;
+if (Товар есть в наличии?) is (нет) then
+  :Обновить базу данных;
+else(да)
+  :Заполнить форму;
+  :Оплатить;
+  :Получить товар;
+endif
+stop
+@enduml
+
+@startuml
+!theme mars
+skinparam actorStyle awesome
+left to right direction
+actor "Пользователь" as User
+
+  usecase "Заказ товара" as UC1
+  usecase "Выбор способа оплаты" as UC2
+  usecase "Авторизация" as UC3
+  usecase "Регистрация" as UC4
+  usecase "Поиск товара" as UC5
+  usecase "Просмотр каталога" as UC6
+  usecase "Оформление заказа" as UC7
+  usecase "Просмотр корзины" as UC8
+  usecase "Редактирование корзины" as UC9
+  usecase "Поиск товара" as UC10
+  usecase "Редактирование профиля" as UC15
+  usecase "Просмотр статуса заказа" as UC12
+
+
+User --> UC1
+User --> UC2
+User --> UC3
+User --> UC4
+User --> UC5
+User --> UC6
+User --> UC7
+User --> UC8
+User --> UC9
+User --> UC10
+User --> UC12
+User --> UC15
+@enduml
+
+@startuml
+!theme materia
+skinparam actorStyle awesome
+left to right direction
+actor "Администратор" as Admin
+
+ usecase "Добавление пользователей" as UC1
+ usecase "Удаление пользователей" as UC2
+ usecase "Редактирование данных пользователей" as UC3
+
+ usecase "Добавление товаров" as UC4
+ usecase "Удаление товаров" as UC5
+ usecase "Редактирование данных товаров" as UC6
+
+ usecase "Обновлять статус заказа клиентов" as UC7
+
+Admin --> UC1
+Admin --> UC2
+Admin --> UC3
+Admin --> UC4
+Admin --> UC5
+Admin --> UC6
+Admin --> UC7
+@enduml
