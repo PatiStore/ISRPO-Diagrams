@@ -1,0 +1,64 @@
+@startuml
+!theme sandstone
+' hide the spot
+hide circle
+
+' avoid problems with angled crows feet
+skinparam linetype ortho
+
+entity "Product" as product {
+  *prduct_id : integer
+  --
+  *name : varchar(255)
+  description : varchar(1000)
+  *price : decimal (10, 2)
+  *category_id : integer <<FK>>
+}
+
+entity "Category" as category {
+  *category_id : integer
+  --
+  *name : varchar (255)
+}
+
+entity "User" as user {
+  *user_id : integer
+  --
+  *password : varchar (255)
+  *email : varchar (255)
+}
+
+entity "Orders" as orders {
+  *order_id : integer
+  --
+  *user_id : integer <<FK>>
+  *product_id : integer <<FK>>
+  *date_of_create : timestamp
+  *total_price : decimal (10, 2)
+}
+
+entity "Orders_items" as orders_it {
+  *order_it_id : integer
+  --
+  *order_id : integer <<FK>>
+  *product_id : integer <<FK>>
+  *quantity : integer
+  *price : decimal (10, 2)
+}
+
+entity "Basket" as basket {
+  *basket_id : integer
+  --
+  *user_id : integer <<FK>>
+  *product_id : integer <<FK>>
+  *quantity: integer <<FK>>
+  *status : varchar (20)
+}
+
+category ||..o{ product
+user ||..o{ orders
+user ||..|| basket
+orders_it |o..|| orders
+product |o..|| basket
+product ||..o| orders
+@enduml
